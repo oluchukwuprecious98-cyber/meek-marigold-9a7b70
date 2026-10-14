@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyHub | Student Study App</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#5b21b6">
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+  <section id="loginPage" class="login-page">
+    <div class="login-card">
+      <div class="logo">S</div>
+      <h1>StudyHub</h1>
+      <p class="muted">Your personal learning space</p>
+
+      <form id="loginForm">
+  <label for="email">Email address</label>
+  <input
+    id="email"
+    type="email"
+    placeholder="Enter your email"
+    autocomplete="email"
+    required
+  >
+
+  <label for="password">Password</label>
+  <input
+    id="password"
+    type="password"
+    placeholder="Enter your password"
+    autocomplete="current-password"
+    required
+  >
+
+  <p id="loginError" class="error" aria-live="polite"></p>
+
+  <button
+    type="submit"
+    id="loginBtn"
+    class="primary-btn"
+  >
+    Log In
+  </button>
+
+  <p style="text-align:center; margin-top:16px;">
+    New to StudyHub?
+  </p>
+
+  <label for="fullName">Full name (for registration)</label>
+  <input
+    id="fullName"
+    type="text"
+    placeholder="Enter your full name"
+    autocomplete="name"
+  >
+
+  <button
+    type="button"
+    id="signupBtn"
+    class="secondary-btn"
+    style="width:100%; margin-top:12px;"
+  >
+    Create Account
+  </button>
+</form>
+    </div>
+  </section>
+
+  <!-- MAIN APP -->
+  <div id="appPage" class="app-page hidden">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="small-logo">S</div>
+        <span>StudyHub</span>
+      </div>
+      <button id="logoutBtn" class="logout-btn">Log out</button>
+    </header>
+
+    <div class="layout">
+
+      <aside class="sidebar">
+        <p class="menu-title">MENU</p>
+        <button class="nav-btn active" data-section="dashboard">🏠 Dashboard</button>
+        <button class="nav-btn" data-section="notes">📝 My Notes</button>
+        <button class="nav-btn" data-section="tasks">✅ My Tasks</button>
+        <button class="nav-btn" data-section="timetable">📅 Timetable</button>
+        <button class="nav-btn" data-section="quiz">🧠 Quiz Practice</button>
+      </aside>
+
+      <main class="content">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="app-section">
+          <div class="welcome">
+            <p class="eyebrow">YOUR LEARNING SPACE</p>
+            <h1>Welcome back, <span id="welcomeName">Student</span>! 👋</h1>
+            <p>Small steps every day lead to great results.</p>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <span>📚</span>
+              <p>Total Notes</p>
+              <h2 id="noteCount">0</h2>
+            </div>
+            <div class="stat-card">
+              <span>✅</span>
+              <p>Pending Tasks</p>
+              <h2 id="taskCount">0</h2>
+            </div>
+            <div class="stat-card">
+              <span>🎯</span>
+              <p>Tasks Completed</p>
+              <h2 id="doneCount">0</h2>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Quick Actions</h2>
+            <p>What would you like to work on today?</p>
+            <div class="quick-actions">
+              <button class="primary-btn" data-go="notes">+ Add a Note</button>
+              <button class="secondary-btn" data-go="tasks">+ Add a Task</button>
+              <button class="secondary-btn" data-go="quiz">Start a Quiz</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Study Tip 💡</h2>
+            <p>Study in short, focused sessions and take small breaks.
+              Review your notes regularly to strengthen your understanding.</p>
+          </div>
+        </section>
+
+        <!-- NOTES -->
+        <section id="notes" class="app-section hidden">
+          <div class="page-heading">
+            <h1>My Notes 📝</h1>
+            <p>Save important ideas from your lectures.</p>
+          </div>
+
+          <form id="noteForm" class="panel form-panel">
+            <label for="noteTitle">Note title</label>
+            <input id="noteTitle" placeholder="e.g. Introduction to Java" required>
+
+            <label for="noteBody">Your note</label>
+            <textarea id="noteBody" rows="5"
+              placeholder="Write what you have learned..." required></textarea>
+
+            <button class="primary-btn" type="submit">Save Note</button>
+          </form>
+
+          <div id="notesList" class="item-list"></div>
+        </section>
+
+        <!-- TASKS -->
+        <section id="tasks" class="app-section hidden">
+          <div class="page-heading">
+            <h1>My Tasks ✅</h1>
+            <p>Keep track of assignments and study goals.</p>
+          </div>
+
+          <form id="taskForm" class="panel form-panel">
+            <label for="taskTitle">Task description</label>
+            <input id="taskTitle"
+              placeholder="e.g. Practise Java exercises" required>
+
+            <label for="taskDate">Due date</label>
+            <input id="taskDate" type="date">
+
+            <button class="primary-btn" type="submit">Add Task</button>
+          </form>
+
+          <div id="tasksList" class="item-list"></div>
+        </section>
+
+        <!-- TIMETABLE -->
+        <section id="timetable" class="app-section hidden">
+          <div class="page-heading">
+            <h1>Study Timetable 📅</h1>
+            <p>A sample weekly plan. Change it to match your classes.</p>
+          </div>
+
+          <form id="scheduleForm" class="panel form-panel">
+            <label for="scheduleDay">Day</label>
+            <select id="scheduleDay">
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+
+            <label for="scheduleTime">Time</label>
+            <input id="scheduleTime" placeholder="e.g. 9:00 AM" required>
+
+            <label for="scheduleSubject">Subject or activity</label>
+            <input id="scheduleSubject"
+              placeholder="e.g. CSC 112 - Java" required>
+
+            <button class="primary-btn" type="submit">Add to Timetable</button>
+          </form>
+
+          <div id="timetableList" class="item-list"></div>
+        </section>
+
+        <!-- QUIZ -->
+        <section id="quiz" class="app-section hidden">
+          <div class="page-heading">
+            <h1>Quiz Practice 🧠</h1>
+            <p>Test your beginner web development knowledge.</p>
+          </div>
+
+          <div class="panel quiz-card">
+            <p id="quizProgress" class="eyebrow">QUESTION 1</p>
+            <h2 id="quizQuestion"></h2>
+            <div id="quizOptions" class="quiz-options"></div>
+            <p id="quizFeedback" aria-live="polite"></p>
+            <button id="nextQuestion" class="primary-btn" disabled>
+              Next Question
+            </button>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
